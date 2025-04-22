@@ -2,7 +2,7 @@
 
 CodeCraft是一个现代化的在线编码解码工具，提供优雅的UI和强大的功能。该工具支持多种编码和哈希算法，并且提供完整的API供集成使用。
 
-![CodeCraft示例图](https://lzx1.top/res/ghithub-img/CodeCraft/1.png)
+
 ![CodeCraft示例图](https://lzx1.top/res/ghithub-img/CodeCraft/2.png)
 
 ## 特性
