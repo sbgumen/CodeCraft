@@ -1,0 +1,507 @@
+/* API 文档特定样式 */
+
+/* 主文档容器 */
+.docs-main {
+    padding-top: 10px;
+}
+
+/* 侧边栏跟随滚动修复 */
+
+/* 文档容器调整 */
+.docs-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+    padding: 0;
+    position: relative; /* 确保定位上下文 */
+    min-height: calc(100vh - var(--header-height) - var(--footer-height) - 100px);
+}
+
+/* 侧边栏修复 - 更强的固定效果 */
+.docs-sidebar {
+    position: sticky; /* 桌面端使用粘性定位 */
+    top: var(--header-height); /* 与header高度对齐 */
+    height: calc(100vh - var(--header-height)); /* 视口高度减去头部高度 */
+    overflow-y: auto; /* 允许内容滚动 */
+    padding: 30px 20px;
+    z-index: 90; /* 确保在其他内容之上 */
+    align-self: start; /* 确保从顶部开始定位 */
+    transition: all 0.3s ease; /* 平滑过渡效果 */
+    background: var(--glass-bg); /* 确保背景可见 */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+
+
+/* 明确设置桌面导航垂直排列 */
+.docs-nav ul {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.docs-nav h3 {
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    font-size: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.docs-nav h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+.docs-nav ul li {
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.docs-nav ul li a {
+    display: block;
+    padding: 8px 15px;
+    border-radius: 6px;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+    font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    text-align: left;
+}
+
+.docs-nav ul li a:hover {
+    background: rgba(52, 152, 219, 0.1);
+    color: var(--primary-color);
+}
+
+.docs-nav ul li a.active {
+    background: rgba(52, 152, 219, 0.15);
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.docs-nav ul ul {
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.docs-nav ul ul li a {
+    padding: 6px 15px;
+    font-size: 14px;
+}
+
+/* 主内容区域 */
+.docs-content {
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* 侧边栏切换按钮 - 优化移动端显示 */
+
+
+.docs-section {
+    margin-bottom: 40px;
+}
+
+.docs-section h2 {
+    margin-bottom: 20px;
+    color: var(--text-color);
+    font-size: 24px;
+    position: relative;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.docs-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+.docs-card {
+    margin-bottom: 30px;
+    padding: 25px;
+}
+
+.docs-card p {
+    margin-bottom: 15px;
+    line-height: 1.7;
+}
+
+.docs-card ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.docs-card ul li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.docs-card ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary-color);
+}
+
+/* API 端点样式 */
+.endpoint-section {
+    margin-bottom: 30px;
+}
+
+.endpoint-section h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: var(--text-color);
+}
+
+.endpoint-url {
+    background: var(--card-bg);
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+}
+
+.endpoint-url .method {
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 8px;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.endpoint-url code {
+    font-size: 15px;
+    color: var(--text-color);
+}
+
+.endpoint-section h4 {
+    margin: 20px 0 10px;
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+/* 参数表格 */
+.params-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.params-table thead {
+    background: rgba(52, 152, 219, 0.1);
+}
+
+.params-table th {
+    text-align: left;
+    padding: 12px 15px;
+    font-weight: 600;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.params-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--glass-border);
+    color: var(--text-light);
+}
+
+.params-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* 代码块 */
+pre {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+pre code {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+code {
+    font-family: 'Courier New', monospace;
+    background: rgba(52, 152, 219, 0.1);
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--primary-color);
+}
+
+pre code {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+}
+
+/* 注意信息框 */
+.note-api {
+    margin-top: 15px;
+    background: rgba(243, 156, 18, 0.1);
+    border-left: 3px solid var(--warning-color);
+    padding: 12px 15px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+.note-api i {
+    color: var(--warning-color);
+    font-size: 16px;
+}
+
+/* 示例部分 */
+.example {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px dashed var(--glass-border);
+}
+
+.example:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.example h4 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+/* 科技感边框 */
+.tech-border {
+    position: relative;
+    height: 2px;
+    width: 100%;
+    margin-top: 30px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    opacity: 0.3;
+    overflow: hidden;
+}
+
+.tech-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, white, transparent);
+    animation: techLine 3s linear infinite;
+}
+
+/* 侧边栏切换按钮（移动设备） */
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+    z-index: 1000; /* 增加z-index确保在顶层 */
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    background: var(--primary-dark);
+    transform: scale(1.1);
+}
+.docs-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.docs-sidebar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.docs-sidebar::-webkit-scrollbar-thumb {
+    background: var(--primary-light);
+    border-radius: 10px;
+}
+/* 响应式设计 */
+@media (max-width: 992px) {
+    .docs-container {
+        grid-template-columns: 220px 1fr;
+    }
+    
+    .docs-content {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+   .docs-container {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 移动端侧边栏调整为固定定位 */
+    .docs-sidebar {
+        position: fixed;
+        left: -300px; /* 默认隐藏 */
+        top: var(--header-height); /* 紧贴头部 */
+        width: 280px;
+        height: calc(100% - var(--header-height)); /* 占满剩余高度 */
+        overflow-y: auto;
+        z-index: 100;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+        padding-bottom: 80px; /* 底部额外空间 */
+    }
+    
+    .docs-sidebar.open {
+        left: 0;
+    }
+    
+    .sidebar-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed; /* 确保固定位置 */
+    }
+    
+    
+    .docs-nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .docs-nav ul li {
+        width: 100%;
+    }
+    
+    .docs-nav ul li a {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+}
+
+@media (max-width: 576px) {
+    .docs-content {
+        padding: 15px;
+    }
+    
+    .endpoint-url {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    .params-table th, .params-table td {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+    
+    pre {
+        padding: 10px;
+    }
+    
+    pre code {
+        font-size: 13px;
+    }
+}
+
+/* 打印样式优化 */
+@media print {
+    .docs-sidebar, header, footer, .sidebar-toggle {
+        display: none;
+    }
+    
+    .docs-container {
+        display: block;
+        padding: 0;
+        box-shadow: none;
+        background: none;
+        backdrop-filter: none;
+    }
+    
+    .docs-content {
+        padding: 0;
+    }
+    
+    .docs-card {
+        box-shadow: none;
+        padding: 0;
+        page-break-inside: avoid;
+    }
+    
+    pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+}
+
+/* 改进的动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 光标悬停时的反馈动画 */
+.docs-nav ul li a:hover {
+    animation: pulseHighlight 0.5s ease-out;
+}
+
+@keyframes pulseHighlight {
+    0% {
+        background: rgba(52, 152, 219, 0);
+    }
+    50% {
+        background: rgba(52, 152, 219, 0.2);
+    }
+    100% {
+        background: rgba(52, 152, 219, 0.1);
+    }
+}

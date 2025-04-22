@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCraft - AZ在线编码解码工具</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/file.css">
+</head>
+<body>
+    <div class="particles-container" id="particles-js"></div>
+    
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <svg style="width:30px" t="1744902491043" class="icon" viewBox="0 0 1461 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13129" width="200" height="200"><path d="M368.687487 896.672817a58.084195 58.084195 0 0 1-44.830084-19.978625L17.161157 550.36042a62.762117 62.762117 0 0 1 2.436418-88.6856L346.467359 152.931983a62.957031 62.957031 0 0 1 88.295773 2.436418 62.762117 62.762117 0 0 1-2.436418 88.490687l-281.649873 266.544084 264.253852 281.649873a62.762117 62.762117 0 0 1-2.582603 88.295774 65.539633 65.539633 0 0 1-43.46569 16.323998h-0.194913zM1086.894664 896.672817a62.762117 62.762117 0 0 1-44.830083-106.032894l265.618245-281.503688-281.796058-266.544085a62.762117 62.762117 0 0 1-2.631331-88.441958 62.957031 62.957031 0 0 1 88.6856-2.436418l326.674871 308.937751c24.851459 23.633251 26.069668 63.444314 2.436417 88.295773l-307.914455 326.479957a59.448589 59.448589 0 0 1-46.291934 21.245562zM613.157628 1021.173756c-5.067749 0-8.722375 0-13.741395-1.218209a62.567204 62.567204 0 0 1-47.461415-74.79802L755.29823 47.045275a62.567204 62.567204 0 0 1 122.064522 27.287877L674.31171 972.835231a62.567204 62.567204 0 0 1-61.007897 48.679623l-0.146185-0.341098z" fill="#FFFFFF" p-id="13130"></path></svg>
+            </div>
+            <h1>CodeCraft</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">编码工具</a></li>
+                <li><a href="docs.html">API文档</a></li>
+                <li><a href="https://github.com/yourusername/codecraft" target="_blank">GitHub</a></li>
+            </ul>
+        </nav>
+        <div class="theme-toggle">
+            <input type="checkbox" id="dark-mode-toggle">
+            <label for="dark-mode-toggle">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </label>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="glass-card">
+                <h2 class="title">AZ在线编码解码工具</h2>
+                <p class="subtitle">使用我们的工具进行安全高效的数据转换</p>
+            </div>
+        </section>
+
+        <section class="encoder-section">
+            <div class="glass-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="encode">编码</button>
+                    <button class="tab-btn" data-tab="decode">解码</button>
+                </div>
+                
+                <div class="tab-content active" id="encode-tab">
+                    <div class="input-mode-selection">
+        <div class="mode-toggle">
+            <button class="mode-btn active" data-mode="text">文本输入</button>
+            <button class="mode-btn" data-mode="file">文件上传</button>
+        </div>
+    </div>
+    
+    <!-- 文本输入区域 -->
+    <div class="input-mode active" id="text-input-mode">
+        <div class="input-group">
+            <label for="input-text">输入文本</label>
+            <textarea id="input-text" placeholder="在这里输入需要编码的文本..."></textarea>
+        </div>
+    </div>
+    
+    <!-- 文件上传区域 -->
+    <div class="input-mode" id="file-input-mode">
+        <div class="file-upload-wrapper">
+            <div class="file-upload-container">
+                <div class="file-drop-zone" id="dropZone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>拖放文件到此处或</p>
+                    <label for="file-input" class="file-select-btn">选择文件</label>
+                    <input type="file" id="file-input" hidden>
+                </div>
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <div class="file-preview">
+                        <i class="fas fa-file-alt file-icon"></i>
+                        <div class="file-details">
+                            <p class="file-name" id="fileName">filename.txt</p>
+                            <p class="file-size" id="fileSize">0 KB</p>
+                        </div>
+                        <button class="file-remove-btn" id="removeFile">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="upload-options">
+                <div class="option-group">
+                    <label>文件处理选项</label>
+                    <div class="select-wrapper">
+                        <select id="file-process-option">
+                            <option value="whole">整个文件处理</option>
+                            <option value="chunk">分块处理（大文件）</option>
+                        </select>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                    
+                    <div class="algorithm-selection">
+    <label for="encoding-algorithm">选择算法</label>
+    <div class="select-wrapper">
+        <select id="encoding-algorithm">
+            <optgroup label="基础编码">
+                <option value="base64">Base64</option>
+                <option value="base32">Base32</option>
+                <option value="hex">十六进制</option>
+                <option value="binary">二进制</option>
+                <option value="url">URL 编码</option>
+                <option value="html">HTML 实体编码</option>
+            </optgroup>
+            <optgroup label="哈希算法">
+                <option value="md5">MD5</option>
+                <option value="sha1">SHA-1</option>
+                <option value="sha256">SHA-256</option>
+                <option value="sha512">SHA-512</option>
+            </optgroup>
+            <optgroup label="加密算法">
+                <option value="aes">AES 加密</option>
+                <option value="rsa">RSA 加密</option>
+                <option value="caesar">凯撒密码</option>
+                <option value="vigenere">维吉尼亚密码</option>
+                <option value="rot13">ROT13</option>
+            </optgroup>
+            <optgroup label="格式转换">
+                <option value="jwt">JWT</option>
+                <option value="xml">XML</option>
+                <option value="json">JSON</option>
+                <option value="yaml">YAML</option>
+            </optgroup>
+            <optgroup label="特殊编码">
+                <option value="morse">摩斯密码</option>
+            </optgroup>
+        </select>
+        <i class="fas fa-chevron-down"></i>
+    </div>
+</div>
+
+<div class="encode-options"></div>
+                    
+                    <button id="encode-btn" class="primary-btn">
+                        <span class="btn-text">编码</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    
+                    <div class="output-group">
+                        <div class="output-header">
+                            <label for="output-text">输出结果</label>
+                            <button id="copy-btn" class="icon-btn" title="复制到剪贴板">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <div class="output-container">
+                            <textarea id="output-text" readonly placeholder="编码结果将显示在这里..."></textarea>
+                            <div class="encoder-animation" id="encoder-animation"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="decode-tab">
+                      <!-- 输入方式选择 -->
+    <div class="input-mode-selection">
+        <div class="mode-toggle">
+            <button class="mode-btn active" data-mode="text" data-target="decode">文本输入</button>
+            <button class="mode-btn" data-mode="file" data-target="decode">文件上传</button>
+        </div>
+    </div>
+    
+    <!-- 文本输入区域 -->
+    <div class="input-mode active" id="text-input-mode-decode">
+        <div class="input-group">
+            <label for="decode-input-text">输入文本</label>
+            <textarea id="decode-input-text" placeholder="在这里输入需要解码的文本..."></textarea>
+        </div>
+    </div>
+    
+    <!-- 文件上传区域 -->
+    <div class="input-mode" id="file-input-mode-decode">
+        <div class="file-upload-wrapper">
+            <div class="file-upload-container">
+                <div class="file-drop-zone" id="decode-dropZone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>拖放文件到此处或</p>
+                    <label for="decode-file-input" class="file-select-btn">选择文件</label>
+                    <input type="file" id="decode-file-input" hidden>
+                </div>
+                <div class="file-info" id="decode-fileInfo" style="display: none;">
+                    <div class="file-preview">
+                        <i class="fas fa-file-alt file-icon"></i>
+                        <div class="file-details">
+                            <p class="file-name" id="decode-fileName">filename.txt</p>
+                            <p class="file-size" id="decode-fileSize">0 KB</p>
+                        </div>
+                        <button class="file-remove-btn" id="decode-removeFile">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="upload-options">
+                <div class="option-group">
+                    <label>文件处理选项</label>
+                    <div class="select-wrapper">
+                        <select id="decode-file-process-option">
+                            <option value="whole">整个文件处理</option>
+                            <option value="chunk">分块处理（大文件）</option>
+                        </select>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                    
+                    
+                    <div class="algorithm-selection">
+    <label for="decoding-algorithm">选择算法</label>
+    <div class="select-wrapper">
+        <select id="decoding-algorithm">
+            <optgroup label="基础解码">
+                <option value="base64">Base64</option>
+                <option value="base32">Base32</option>
+                <option value="hex">十六进制</option>
+                <option value="binary">二进制</option>
+                <option value="url">URL 解码</option>
+                <option value="html">HTML 实体解码</option>
+            </optgroup>
+            <optgroup label="解密算法">
+                <option value="aes">AES 解密</option>
+                <option value="rsa">RSA 解密</option>
+                <option value="caesar">凯撒密码</option>
+                <option value="vigenere">维吉尼亚密码</option>
+                <option value="rot13">ROT13</option>
+            </optgroup>
+            <optgroup label="格式解析">
+                <option value="jwt">JWT</option>
+                <option value="xml">XML</option>
+                <option value="json">JSON</option>
+                <option value="yaml">YAML</option>
+            </optgroup>
+            <optgroup label="特殊解码">
+                <option value="morse">摩斯密码</option>
+            </optgroup>
+        </select>
+        <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="note-md5">
+        <i class="fas fa-info-circle"></i>
+        <span>注意: MD5, SHA1, SHA256, SHA512 等哈希算法是单向的，无法解码</span>
+    </div>
+</div>
+                    
+                    
+                    <div class="decode-options"></div>
+                    
+                    
+                    
+                    <button id="decode-btn" class="primary-btn">
+                        <span class="btn-text">解码</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    
+                    
+                    
+                    <div class="output-group">
+                        <div class="output-header">
+                            <label for="decode-output-text">输出结果</label>
+                            <button id="decode-copy-btn" class="icon-btn" title="复制到剪贴板">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <div class="output-container">
+                            <textarea id="decode-output-text" readonly placeholder="解码结果将显示在这里..."></textarea>
+                            <div class="decoder-animation" id="decoder-animation"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2 class="section-title">特色功能</h2>
+            <div class="features-grid">
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>多种算法支持</h3>
+                    <p>支持Base64、MD5、SHA1、SHA256等多种编码和哈希算法</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>响应式设计</h3>
+                    <p>在任何设备上都能获得最佳体验</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>API支持</h3>
+                    <p>提供完整的API，可集成到您的应用中</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>高性能</h3>
+                    <p>优化的算法实现，确保快速响应</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 @阿泽 | CodeCraft. 保留所有权利。</p>
+            <div class="social-links">
+                <a href="https://github.com/sbgumen" title="GitHub"><svg t="1744903107460" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="14930" width="200" height="200"><path d="M512 0C229.283787 0 0.142041 234.942803 0.142041 524.867683c0 231.829001 146.647305 428.553077 350.068189 497.952484 25.592898 4.819996 34.976961-11.38884 34.976961-25.294314 0-12.45521-0.469203-45.470049-0.725133-89.276559-142.381822 31.735193-172.453477-70.380469-172.453477-70.380469-23.246882-60.569859-56.816233-76.693384-56.816234-76.693385-46.493765-32.58829 3.540351-31.948468 3.540351-31.948467 51.356415 3.71097 78.356923 54.086324 78.356923 54.086324 45.683323 80.19108 119.817417 57.072162 148.993321 43.593236 4.649376-33.91059 17.915029-57.029508 32.50298-70.167195-113.675122-13.222997-233.151301-58.223843-233.1513-259.341366 0-57.285437 19.919806-104.163095 52.678715-140.846248-5.246544-13.265652-22.820334-66.626844 4.990615-138.884127 0 0 42.996069-14.076094 140.760939 53.787741 40.863327-11.644769 84.627183-17.445825 128.177764-17.6591 43.465272 0.213274 87.271782 6.014331 128.135109 17.6591 97.679561-67.906489 140.59032-53.787741 140.59032-53.787741 27.938914 72.257282 10.407779 125.618474 5.118579 138.884127 32.844219 36.683154 52.593405 83.560812 52.593405 140.846248 0 201.586726-119.646798 245.990404-233.663158 258.957473 18.341577 16.208835 34.721032 48.199958 34.721032 97.210357 0 70.167195-0.639822 126.7275-0.639823 143.960051 0 14.033439 9.213443 30.370239 35.190235 25.209005 203.250265-69.527373 349.769606-266.123484 349.769605-497.867175C1023.857959 234.942803 794.673558 0 512 0" fill="#3E75C3" p-id="14931"></path></svg></i></a>
+                <a href="tencent://message/?uin=3231838767&Site=&Menu=yes" title="QQ"><svg t="1744903325122" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="16861" width="200" height="200"><path d="M68.399765 590.615655c-37.073602 90.765025-43.465533 176.418105-14.062849 191.757941 20.45478 11.505876 53.692423-14.061849 84.374094-60.084355 11.504876 51.135451 42.186547 95.87897 84.373094 132.952572-44.743519 16.619821-74.146204 44.743519-74.146204 75.42519 0 51.135451 79.259149 93.321998 176.418105 93.321997 88.208052 0 161.07627-33.237643 175.138119-77.982162h20.45478C535.009753 990.751357 607.87897 1023.989 696.087023 1023.989c98.436943 0 176.418105-40.908561 176.418104-93.321997 0-30.68167-29.402684-58.806368-74.146203-75.42519 42.186547-37.073602 72.868217-81.817121 84.374094-132.952572 30.68067 46.022506 62.640327 71.589231 84.373093 60.084355 30.68167-15.339835 24.289739-102.270901-14.061849-191.757941-29.403684-70.311245-69.033258-122.725682-99.714929-134.230558 0-3.835959 1.278986-8.949904 1.278987-14.062849 0-26.845712-7.669918-52.413437-20.454781-72.868217v-5.112945c0-12.783863-2.555973-24.289739-7.669917-34.516629C818.813704 145.736434 701.200968 0 510.722014 0 320.24206 0 202.630323 145.736434 194.959406 329.824457c-5.112945 10.22689-7.669918 21.732767-7.669918 34.516629v5.112945c-12.783863 20.45478-20.45478 46.022506-20.45478 72.869217v14.061849c-28.123698 11.504876-69.032258 62.640327-98.434943 134.230558z" fill="#4CAFE9" p-id="16862"></path></svg></a>
+                <a href=" https://b23.tv/ZgbKt3T" title="bilibili"><svg t="1744903408174" class="icon" viewBox="0 0 1129 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="17852" width="200" height="200"><path d="M234.908525 9.656195a80.468288 80.468288 0 0 1 68.398044 0 167.374038 167.374038 0 0 1 41.84351 30.577949l160.936576 140.819503H621.156306L782.092881 40.234144a168.983404 168.983404 0 0 1 41.84351-30.577949 80.468288 80.468288 0 0 1 107.022823 66.788678 80.468288 80.468288 0 0 1-17.703024 53.913753 449.817728 449.817728 0 0 1-35.406046 32.187315 232.553351 232.553351 0 0 1-22.531121 18.507706h100.58536a170.59277 170.59277 0 0 1 118.288383 53.10907A171.397453 171.397453 0 0 1 1128.106519 352.4511v462.692655a325.896565 325.896565 0 0 1-4.023415 70.00741 178.639599 178.639599 0 0 1-80.468288 112.655603 173.006819 173.006819 0 0 1-92.53853 25.749852H212.377404a341.18554 341.18554 0 0 1-72.421459-4.023415 177.834916 177.834916 0 0 1-111.046237-80.468287A172.202136 172.202136 0 0 1 1.550491 846.526387V388.66183A360.497929 360.497929 0 0 1 1.550491 321.873151a177.030233 177.030233 0 0 1 160.936575-143.233552h105.413457c-16.89834-12.070243-31.382632-26.554535-46.671607-39.429461a80.468288 80.468288 0 0 1-25.749852-65.983996A80.468288 80.468288 0 0 1 234.908525 9.656195M216.400819 321.873151a80.468288 80.468288 0 0 0-63.569948 57.937167 108.632188 108.632188 0 0 0 0 30.577949v380.615001a80.468288 80.468288 0 0 0 55.523119 80.468288 106.21814 106.21814 0 0 0 34.601364 5.63278h654.207179a80.468288 80.468288 0 0 0 76.444873-47.47629 112.655603 112.655603 0 0 0 8.046829-53.10907v-354.060465a135.186723 135.186723 0 0 0 0-38.624779 80.468288 80.468288 0 0 0-52.304387-54.718435 129.553943 129.553943 0 0 0-49.890338-7.242146H254.220914a268.764081 268.764081 0 0 0-37.820095 0z m0 0" fill="#20B0E3" p-id="17853"></path><path d="M348.368811 447.40368a80.468288 80.468288 0 0 1 55.523118 18.507706 80.468288 80.468288 0 0 1 28.163901 59.546533v80.468287a80.468288 80.468288 0 0 1-16.093658 51.499705 80.468288 80.468288 0 0 1-131.967992-9.656195 104.608774 104.608774 0 0 1-10.460877-54.718436v-80.468287a80.468288 80.468288 0 0 1 70.00741-67.593362z m416.021047 0a80.468288 80.468288 0 0 1 86.101068 75.64019v80.468288a94.147897 94.147897 0 0 1-12.070243 53.10907 80.468288 80.468288 0 0 1-132.772675 0 95.757262 95.757262 0 0 1-12.874926-57.132485v-80.468287a80.468288 80.468288 0 0 1 70.00741-70.812093z m0 0" fill="#20B0E3" p-id="17854"></path></svg></a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+    <script src="assets/js/upfile.js"></script>
+    <script src="assets/js/algorithm-options.js"></script>
+    <script src="assets/js/particles.min.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

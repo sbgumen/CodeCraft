@@ -1,0 +1,686 @@
+/* 高级动画样式 */
+
+/* 页面元素进入动画 */
+.fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+    opacity: 0;
+}
+
+.fade-in-left {
+    animation: fadeInLeft 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+    opacity: 0;
+}
+
+.fade-in-right {
+    animation: fadeInRight 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+    opacity: 0;
+}
+
+.zoom-in {
+    animation: zoomIn 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+    opacity: 0;
+}
+
+/* 设置动画延迟 */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* 编码器动画元素 */
+.encoder-animation, .decoder-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.encoder-animation.active, .decoder-animation.active {
+    opacity: 1;
+}
+
+/* 数据流动画 */
+.data-stream {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    height: 2px;
+    width: 100%;
+    animation: dataStreamAnim 1.5s ease-in-out forwards;
+}
+
+/* 数字雨效果 */
+.matrix-rain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.matrix-drop {
+    position: absolute;
+    width: 2px;
+    top: 0;
+    background: linear-gradient(180deg, var(--primary-color), transparent);
+    animation: matrixDrop 1.5s linear infinite;
+    opacity: 0;
+}
+
+/* MD5动画效果 */
+.md5-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.hash-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: hashParticle 1.2s ease-out forwards;
+}
+
+/* 编码器进度条 */
+.progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    animation: progressAnim 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    z-index: 2;
+}
+
+/* 解码动画的补充效果 */
+.decode-pixel {
+    position: absolute;
+    background: var(--primary-light);
+    opacity: 0;
+    border-radius: 2px;
+    animation: decodePixel 0.8s ease-out forwards;
+}
+
+/* 算法选择悬停动画 */
+.select-wrapper select:hover + i {
+    animation: wiggle 0.5s ease;
+}
+
+/* 在选择框中添加选择指示器 */
+.algorithm-selection .select-wrapper::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.algorithm-selection .select-wrapper:hover::after {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* 高级按钮悬停效果 */
+.primary-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.primary-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.3s ease;
+}
+
+.primary-btn:hover::before {
+    left: 100%;
+    transition: left 0.7s ease;
+}
+
+/* 文本区域聚焦效果 */
+textarea:focus {
+    animation: pulseGlow 1.5s infinite alternate;
+}
+
+/* 复制按钮成功效果 */
+.icon-btn.copied {
+    background: var(--success-color) !important;
+    color: white !important;
+    animation: pulseShrink 0.5s ease;
+}
+
+.icon-btn.copied i {
+    animation: rotate360 0.5s ease;
+}
+
+/* 标签页切换动画 */
+.tab-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-btn::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.tab-btn:hover::before {
+    width: 80%;
+}
+
+.tab-btn.active::before {
+    width: 100%;
+}
+
+/* 特效卡片悬停动画 */
+.feature-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.feature-icon i {
+    animation: floatIcon 3s ease-in-out infinite;
+}
+
+/* 滚动监听动画类 */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Logo 呼吸效果 */
+.logo-icon {
+    animation: breathe 3s ease-in-out infinite;
+}
+
+/* 磨砂玻璃突出效果 */
+.glass-container:hover {
+    box-shadow: 0 15px 35px rgba(52, 152, 219, 0.3);
+}
+
+/* 关键帧动画定义 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 30px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translate3d(-30px, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translate3d(30px, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes dataStreamAnim {
+    0% {
+        top: 0;
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    20% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes matrixDrop {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes hashParticle {
+    0% {
+        transform: translate(50%, 50%) scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(var(--x) * 100%), calc(var(--y) * 100%)) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes progressAnim {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes decodePixel {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes wiggle {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(5px);
+    }
+    50% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(3px);
+    }
+}
+
+@keyframes pulseGlow {
+    from {
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    }
+    to {
+        box-shadow: 0 0 12px rgba(52, 152, 219, 0.6);
+    }
+}
+
+@keyframes pulseShrink {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes rotate360 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes floatIcon {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes breathe {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(52, 152, 219, 0.4);
+    }
+}
+
+/* 文档页面特定动画 */
+.docs-card {
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.docs-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(52, 152, 219, 0.2);
+}
+
+/* 终端风格动画 */
+.endpoint-url {
+    position: relative;
+    overflow: hidden;
+}
+
+.endpoint-url::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 18px;
+    background: var(--primary-color);
+    animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+    from, to {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+
+/* 算法选项相关样式 */
+.algorithm-options {
+    margin: 20px 0;
+    padding: 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+}
+
+.algorithm-options h4 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--glass-border);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.algorithm-options .option-group {
+    margin-bottom: 15px;
+}
+
+.algorithm-options label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.algorithm-options input[type="text"],
+.algorithm-options input[type="number"],
+.algorithm-options textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--glass-border);
+    background: var(--card-bg);
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.algorithm-options textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.algorithm-options input[type="text"]:focus,
+.algorithm-options input[type="number"]:focus,
+.algorithm-options textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.algorithm-options .hint {
+    font-size: 12px;
+    color: var(--text-lighter);
+    margin-top: 5px;
+}
+
+/* 动态生成的密钥显示 */
+.key-display {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(46, 204, 113, 0.1);
+    border-radius: var(--border-radius);
+    border-left: 3px solid var(--success-color);
+}
+
+.key-display h5 {
+    color: var(--success-color);
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.key-display p {
+    margin-bottom: 5px;
+    font-size: 13px;
+    word-break: break-all;
+}
+
+.key-display .copy-key {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    background: rgba(46, 204, 113, 0.2);
+    color: var(--success-color);
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+}
+
+.key-display .copy-key:hover {
+    background: rgba(46, 204, 113, 0.3);
+}
+
+/* 特殊算法选项 */
+.algorithm-options.aes {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.05) 0%, rgba(142, 68, 173, 0.05) 100%);
+}
+
+.algorithm-options.rsa {
+    background: linear-gradient(135deg, rgba(46, 204, 113, 0.05) 0%, rgba(52, 152, 219, 0.05) 100%);
+}
+
+.algorithm-options.caesar, 
+.algorithm-options.vigenere {
+    background: linear-gradient(135deg, rgba(243, 156, 18, 0.05) 0%, rgba(231, 76, 60, 0.05) 100%);
+}
+
+.algorithm-options.jwt {
+    background: linear-gradient(135deg, rgba(155, 89, 182, 0.05) 0%, rgba(41, 128, 185, 0.05) 100%);
+}
+
+/* 进度条 */
+.algorithm-options .progress-wrapper {
+    margin-top: 15px;
+}
+
+.algorithm-options .progress-bar-container {
+    height: 6px;
+    background: rgba(189, 195, 199, 0.3);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.algorithm-options .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 3px;
+}
+
+.algorithm-options .progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-lighter);
+}
+
+
+/* 响应式动画调整 */
+@media (max-width: 768px) {
+    .fade-in-left, .fade-in-right {
+        animation: fadeInUp 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+    }
+    .algorithm-options {
+        padding: 15px;
+    }
+}
+
+/* 针对触摸设备优化的悬停效果 */
+@media (hover: none) {
+    .glass-card:hover {
+        transform: none;
+        box-shadow: 0 8px 32px 0 var(--card-shadow);
+    }
+    
+    .feature-card:hover::before {
+        opacity: 0;
+    }
+    
+    .primary-btn:hover {
+        transform: none;
+    }
+}
+
+/* 减少动画，提高性能的选项 */
+.reduced-motion {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* 添加科技感十足的数据线条动画 */
+.tech-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+.tech-line {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    height: 1px;
+    width: 100%;
+    animation: techLineAnim 8s linear infinite;
+    opacity: 0;
+}
+
+@keyframes techLineAnim {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    10% {
+        opacity: 0.5;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(2000%);
+    }
+}

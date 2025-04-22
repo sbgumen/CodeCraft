@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCraft API 文档</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/docs.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+<body>
+    <div class="particles-container" id="particles-js"></div>
+    
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <h1>CodeCraft</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">编码工具</a></li>
+                <li><a href="#" class="active">API文档</a></li>
+                <li><a href="https://github.com/yourusername/CodeCraft" target="_blank">GitHub</a></li>
+            </ul>
+        </nav>
+        <div class="theme-toggle">
+            <input type="checkbox" id="dark-mode-toggle">
+            <label for="dark-mode-toggle">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </label>
+        </div>
+    </header>
+
+    <main class="docs-main">
+        <div class="docs-container glass-container">
+            <div class="docs-sidebar glass-card">
+                <nav class="docs-nav">
+                    <h3>API文档</h3>
+                    <ul>
+                        <li><a href="#introduction" class="active">介绍</a></li>
+            <li><a href="#authentication">身份验证</a></li>
+            <li><a href="#rate-limits">请求限制</a></li>
+            <li><a href="#endpoints">API端点</a></li>
+            <li><a href="#encode-endpoint" style="padding-left: 30px;">文本编码 API</a></li>
+            <li><a href="#decode-endpoint" style="padding-left: 30px;">文本解码 API</a></li>
+            <li><a href="#file-encode-endpoint" style="padding-left: 30px;">文件编码 API</a></li>
+            <li><a href="#file-decode-endpoint" style="padding-left: 30px;">文件解码 API</a></li>
+            <li><a href="#error-codes">错误代码</a></li>
+            <li><a href="#examples">使用示例</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="docs-content">
+                <section id="introduction" class="docs-section">
+                    <h2>介绍</h2>
+                    <div class="docs-card glass-card">
+                        <p>CodeCraft API 提供了一个简单且强大的接口，用于执行多种编码和解码操作。API 设计简洁，易于集成到您的应用程序中。</p>
+                        <p>所有 API 请求都应该使用 HTTPS 协议发送到 <code>https://jm.lzx1.top/api/</code>。</p>
+                        <div class="tech-border"></div>
+                    </div>
+                </section>
+                
+                <section id="authentication" class="docs-section">
+                    <h2>身份验证</h2>
+                    <div class="docs-card glass-card">
+                        <p>目前，API 不需要身份验证即可使用。但是，我们建议在生产环境中实现适当的身份验证机制。</p>
+                        <div class="tech-border"></div>
+                    </div>
+                </section>
+                
+                <section id="rate-limits" class="docs-section">
+                    <h2>请求限制</h2>
+                    <div class="docs-card glass-card">
+                        <p>为了防止服务过载，我们对API请求实施了以下限制：</p>
+                        <ul>
+                            <li>每个IP每分钟最多60个请求</li>
+                            <li>每次请求的输入数据大小限制为1MB</li>
+                        </ul>
+                        <p>如果超过这些限制，API将返回HTTP 429状态码（请求过多）。</p>
+                        <div class="tech-border"></div>
+                    </div>
+                </section>
+                
+                <section id="endpoints" class="docs-section">
+    <h2>API端点</h2>
+    
+    <div id="encode-endpoint" class="endpoint-section">
+        <h3>文本编码 API</h3>
+        <div class="docs-card glass-card">
+            <div class="endpoint-url">
+                <span class="method">POST</span>
+                <code>/api/encode.php</code>
+            </div>
+            
+            <h4>请求参数</h4>
+            <table class="params-table">
+                <thead>
+                    <tr>
+                        <th>参数名</th>
+                        <th>类型</th>
+                        <th>必需</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>text</td>
+                        <td>string</td>
+                        <td>是</td>
+                        <td>要编码的文本</td>
+                    </tr>
+                    <tr>
+                        <td>algorithm</td>
+                        <td>string</td>
+                        <td>是</td>
+                        <td>编码算法（支持：base64, base32, md5, sha1, sha256, sha512, url, html, hex, binary, morse, aes, rsa, caesar, vigenere, rot13, jwt, xml, json, yaml）</td>
+                    </tr>
+                    <tr>
+                        <td>其他选项</td>
+                        <td>mixed</td>
+                        <td>否</td>
+                        <td>根据算法需要的特定选项，如AES的密钥、IV和模式等</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>响应格式</h4>
+            <pre><code>{
+  "success": true,
+  "data": {
+    "original": "原始文本",
+    "encoded": "编码后的文本",
+    "algorithm": "使用的算法",
+    // 可能包含其他算法特定信息
+  }
+}</code></pre>
+            <div class="tech-border"></div>
+        </div>
+    </div>
+    
+    <div id="decode-endpoint" class="endpoint-section">
+        <h3>文本解码 API</h3>
+        <div class="docs-card glass-card">
+            <div class="endpoint-url">
+                <span class="method">POST</span>
+                <code>/api/decode.php</code>
+            </div>
+            
+            <h4>请求参数</h4>
+            <table class="params-table">
+                <thead>
+                    <tr>
+                        <th>参数名</th>
+                        <th>类型</th>
+                        <th>必需</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>text</td>
+                        <td>string</td>
+                        <td>是</td>
+                        <td>要解码的文本</td>
+                    </tr>
+                    <tr>
+                        <td>algorithm</td>
+                        <td>string</td>
+                        <td>是</td>
+                        <td>解码算法（支持：base64, base32, url, html, hex, binary, morse, aes, rsa, caesar, vigenere, rot13, jwt, xml, json, yaml）</td>
+                    </tr>
+                    <tr>
+                        <td>其他选项</td>
+                        <td>mixed</td>
+                        <td>否</td>
+                        <td>根据算法需要的特定选项，如AES的密钥、IV和模式等</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>响应格式</h4>
+            <pre><code>{
+  "success": true,
+  "data": {
+    "original": "编码的文本",
+    "decoded": "解码后的文本",
+    "algorithm": "使用的算法"
+  }
+}</code></pre>
+            <div class="note-api">
+                <i class="fas fa-info-circle"></i>
+                <span>注意: MD5, SHA1, SHA256, SHA512 等哈希算法是单向的，无法解码</span>
+            </div>
+            <div class="tech-border"></div>
+        </div>
+    </div>
+    
+    <div id="file-encode-endpoint" class="endpoint-section">
+        <h3>文件编码 API</h3>
+        <div class="docs-card glass-card">
+            <div class="endpoint-url">
+                <span class="method">POST</span>
+                <code>/api/encode_file.php</code>
+            </div>
+            
+            <h4>请求参数</h4>
+            <table class="params-table">
+                <thead>
+                    <tr>
+                        <th>参数名</th>
+                        <th>类型</th>
+                        <th>必需</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>file</td>
+                        <td>file</td>
+                        <td>是</td>
+                        <td>要编码的文件（最大10MB）</td>
+                    </tr>
+                    <tr>
+                        <td>algorithm</td>
+                        <td>string</td>
+                        <td>是</td>
+                        <td>编码算法（支持：base64, hex, binary, aes, rsa, caesar, vigenere, rot13）</td>
+                    </tr>
+                    <tr>
+                        <td>processOption</td>
+                        <td>string</td>
+                        <td>否</td>
+                        <td>处理选项（whole: 整个文件处理, chunk: 分块处理）</td>
+                    </tr>
+                    <tr>
+                        <td>其他选项</td>
+                        <td>mixed</td>
+                        <td>否</td>
+                        <td>根据算法需要的特定选项</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>响应格式</h4>
+            <pre><code>{
+  "success": true,
+  "data": {
+    "originalFileName": "原始文件名",
+    "algorithm": "使用的算法",
+    "fileUrl": "处理后文件的URL",
+    "fileName": "处理后的文件名",
+    "fileSize": 文件大小（字节）,
+    "fileSizeFormatted": "格式化的文件大小"
+    // 可能包含其他算法特定信息
+  }
+}</code></pre>
+            <div class="tech-border"></div>
+        </div>
+    </div>
+    
+    <div id="file-decode-endpoint" class="endpoint-section">
+        <h3>文件解码 API</h3>
+        <div class="docs-card glass-card">
+            <div class="endpoint-url">
+                <span class="method">POST</span>
+                <code>/api/decode_file.php</code>
+            </div>
+            
+            <h4>请求参数</h4>
+            <table class="params-table">
+                <thead>
+                    <tr>
+                        <th>参数名</th>
+                        <th>类型</th>
+                        <th>必需</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>file</td>
+                        <td>file</td>
+                        <td>是</td>
+                        <td>要解码的文件（最大10MB）</td>
+                    </tr>
+                    <tr>
+                        <td>algorithm</td>
+                        <td>string</td>
+                        <td>是</td>
+                        <td>解码算法（支持：base64, hex, binary, aes, rsa, caesar, vigenere, rot13）</td>
+                    </tr>
+                    <tr>
+                        <td>processOption</td>
+                        <td>string</td>
+                        <td>否</td>
+                        <td>处理选项（whole: 整个文件处理, chunk: 分块处理）</td>
+                    </tr>
+                    <tr>
+                        <td>其他选项</td>
+                        <td>mixed</td>
+                        <td>否</td>
+                        <td>根据算法需要的特定选项，如密钥等</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>响应格式</h4>
+            <pre><code>{
+  "success": true,
+  "data": {
+    "originalFileName": "原始文件名",
+    "algorithm": "使用的算法",
+    "fileUrl": "处理后文件的URL",
+    "fileName": "处理后的文件名",
+    "fileSize": 文件大小（字节）,
+    "fileSizeFormatted": "格式化的文件大小"
+  }
+}</code></pre>
+            <div class="tech-border"></div>
+        </div>
+    </div>
+</section>
+                
+                <section id="examples" class="docs-section">
+                    <h2>使用示例</h2>
+                    <div class="docs-card glass-card">
+                        <div class="example">
+                            <h4>使用 cURL 进行 Base64 编码</h4>
+                            <pre><code>curl -X POST https://jm.lzx1.top/api/encode.php \
+     -d "text=Hello World" \
+     -d "algorithm=base64"</code></pre>
+                            <p>响应:</p>
+                            <pre><code>{
+  "success": true,
+  "data": {
+    "original": "Hello World",
+    "encoded": "SGVsbG8gV29ybGQ=",
+    "algorithm": "base64"
+  }
+}</code></pre>
+                        </div>
+                        
+                        <div class="example">
+                            <h4>使用 JavaScript 计算 MD5 哈希</h4>
+                            <pre><code>fetch('https://jm.lzx1.top/api/encode.php', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  body: 'text=password123&algorithm=md5'
+})
+.then(response => response.json())
+.then(data => console.log(data));</code></pre>
+                        </div>
+                        
+                        <div class="example">
+                            <h4>使用 PHP 进行 URL 编码</h4>
+                            <pre><code>&lt;?php
+$data = [
+    'text' => 'https://example.com?param=value&special= ',
+    'algorithm' => 'url'
+];
+
+$ch = curl_init('https://jm.lzx1.top/api/encode.php');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?&gt;</code></pre>
+                        </div>
+                        <div class="example">
+    <h4>使用 JavaScript 上传并编码文件</h4>
+    <pre><code>// 创建FormData对象
+const formData = new FormData();
+const fileInput = document.getElementById('file-input');
+const file = fileInput.files[0];
+
+// 添加文件和参数
+formData.append('file', file);
+formData.append('algorithm', 'base64');
+formData.append('processOption', 'whole');
+
+// 发送请求
+fetch('https://jm.lzx1.top/api/encode_file.php', {
+  method: 'POST',
+  body: formData
+})
+.then(response => response.json())
+.then(data => {
+  if (data.success) {
+    console.log('文件URL:', data.data.fileUrl);
+    window.location.href = data.data.fileUrl; // 下载文件
+  }
+});</code></pre>
+</div>
+                        <div class="tech-border"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 @阿泽 | CodeCraft. 保留所有权利。</p>
+            <div class="social-links">
+                <a href="https://github.com/sbgumen" title="GitHub"><svg t="1744903107460" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="14930" width="200" height="200"><path d="M512 0C229.283787 0 0.142041 234.942803 0.142041 524.867683c0 231.829001 146.647305 428.553077 350.068189 497.952484 25.592898 4.819996 34.976961-11.38884 34.976961-25.294314 0-12.45521-0.469203-45.470049-0.725133-89.276559-142.381822 31.735193-172.453477-70.380469-172.453477-70.380469-23.246882-60.569859-56.816233-76.693384-56.816234-76.693385-46.493765-32.58829 3.540351-31.948468 3.540351-31.948467 51.356415 3.71097 78.356923 54.086324 78.356923 54.086324 45.683323 80.19108 119.817417 57.072162 148.993321 43.593236 4.649376-33.91059 17.915029-57.029508 32.50298-70.167195-113.675122-13.222997-233.151301-58.223843-233.1513-259.341366 0-57.285437 19.919806-104.163095 52.678715-140.846248-5.246544-13.265652-22.820334-66.626844 4.990615-138.884127 0 0 42.996069-14.076094 140.760939 53.787741 40.863327-11.644769 84.627183-17.445825 128.177764-17.6591 43.465272 0.213274 87.271782 6.014331 128.135109 17.6591 97.679561-67.906489 140.59032-53.787741 140.59032-53.787741 27.938914 72.257282 10.407779 125.618474 5.118579 138.884127 32.844219 36.683154 52.593405 83.560812 52.593405 140.846248 0 201.586726-119.646798 245.990404-233.663158 258.957473 18.341577 16.208835 34.721032 48.199958 34.721032 97.210357 0 70.167195-0.639822 126.7275-0.639823 143.960051 0 14.033439 9.213443 30.370239 35.190235 25.209005 203.250265-69.527373 349.769606-266.123484 349.769605-497.867175C1023.857959 234.942803 794.673558 0 512 0" fill="#3E75C3" p-id="14931"></path></svg></i></a>
+                <a href="tencent://message/?uin=3231838767&Site=&Menu=yes" title="QQ"><svg t="1744903325122" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="16861" width="200" height="200"><path d="M68.399765 590.615655c-37.073602 90.765025-43.465533 176.418105-14.062849 191.757941 20.45478 11.505876 53.692423-14.061849 84.374094-60.084355 11.504876 51.135451 42.186547 95.87897 84.373094 132.952572-44.743519 16.619821-74.146204 44.743519-74.146204 75.42519 0 51.135451 79.259149 93.321998 176.418105 93.321997 88.208052 0 161.07627-33.237643 175.138119-77.982162h20.45478C535.009753 990.751357 607.87897 1023.989 696.087023 1023.989c98.436943 0 176.418105-40.908561 176.418104-93.321997 0-30.68167-29.402684-58.806368-74.146203-75.42519 42.186547-37.073602 72.868217-81.817121 84.374094-132.952572 30.68067 46.022506 62.640327 71.589231 84.373093 60.084355 30.68167-15.339835 24.289739-102.270901-14.061849-191.757941-29.403684-70.311245-69.033258-122.725682-99.714929-134.230558 0-3.835959 1.278986-8.949904 1.278987-14.062849 0-26.845712-7.669918-52.413437-20.454781-72.868217v-5.112945c0-12.783863-2.555973-24.289739-7.669917-34.516629C818.813704 145.736434 701.200968 0 510.722014 0 320.24206 0 202.630323 145.736434 194.959406 329.824457c-5.112945 10.22689-7.669918 21.732767-7.669918 34.516629v5.112945c-12.783863 20.45478-20.45478 46.022506-20.45478 72.869217v14.061849c-28.123698 11.504876-69.032258 62.640327-98.434943 134.230558z" fill="#4CAFE9" p-id="16862"></path></svg></a>
+                <a href=" https://b23.tv/ZgbKt3T" title="bilibili"><svg t="1744903408174" class="icon" viewBox="0 0 1129 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="17852" width="200" height="200"><path d="M234.908525 9.656195a80.468288 80.468288 0 0 1 68.398044 0 167.374038 167.374038 0 0 1 41.84351 30.577949l160.936576 140.819503H621.156306L782.092881 40.234144a168.983404 168.983404 0 0 1 41.84351-30.577949 80.468288 80.468288 0 0 1 107.022823 66.788678 80.468288 80.468288 0 0 1-17.703024 53.913753 449.817728 449.817728 0 0 1-35.406046 32.187315 232.553351 232.553351 0 0 1-22.531121 18.507706h100.58536a170.59277 170.59277 0 0 1 118.288383 53.10907A171.397453 171.397453 0 0 1 1128.106519 352.4511v462.692655a325.896565 325.896565 0 0 1-4.023415 70.00741 178.639599 178.639599 0 0 1-80.468288 112.655603 173.006819 173.006819 0 0 1-92.53853 25.749852H212.377404a341.18554 341.18554 0 0 1-72.421459-4.023415 177.834916 177.834916 0 0 1-111.046237-80.468287A172.202136 172.202136 0 0 1 1.550491 846.526387V388.66183A360.497929 360.497929 0 0 1 1.550491 321.873151a177.030233 177.030233 0 0 1 160.936575-143.233552h105.413457c-16.89834-12.070243-31.382632-26.554535-46.671607-39.429461a80.468288 80.468288 0 0 1-25.749852-65.983996A80.468288 80.468288 0 0 1 234.908525 9.656195M216.400819 321.873151a80.468288 80.468288 0 0 0-63.569948 57.937167 108.632188 108.632188 0 0 0 0 30.577949v380.615001a80.468288 80.468288 0 0 0 55.523119 80.468288 106.21814 106.21814 0 0 0 34.601364 5.63278h654.207179a80.468288 80.468288 0 0 0 76.444873-47.47629 112.655603 112.655603 0 0 0 8.046829-53.10907v-354.060465a135.186723 135.186723 0 0 0 0-38.624779 80.468288 80.468288 0 0 0-52.304387-54.718435 129.553943 129.553943 0 0 0-49.890338-7.242146H254.220914a268.764081 268.764081 0 0 0-37.820095 0z m0 0" fill="#20B0E3" p-id="17853"></path><path d="M348.368811 447.40368a80.468288 80.468288 0 0 1 55.523118 18.507706 80.468288 80.468288 0 0 1 28.163901 59.546533v80.468287a80.468288 80.468288 0 0 1-16.093658 51.499705 80.468288 80.468288 0 0 1-131.967992-9.656195 104.608774 104.608774 0 0 1-10.460877-54.718436v-80.468287a80.468288 80.468288 0 0 1 70.00741-67.593362z m416.021047 0a80.468288 80.468288 0 0 1 86.101068 75.64019v80.468288a94.147897 94.147897 0 0 1-12.070243 53.10907 80.468288 80.468288 0 0 1-132.772675 0 95.757262 95.757262 0 0 1-12.874926-57.132485v-80.468287a80.468288 80.468288 0 0 1 70.00741-70.812093z m0 0" fill="#20B0E3" p-id="17854"></path></svg></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/particles.min.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script>
+        // 文档页面的特定脚本
+        document.addEventListener('DOMContentLoaded', function() {
+
+
+            
+            // 侧边栏导航交互
+            const sidebar = document.querySelector('.docs-sidebar');
+            const origParent = sidebar.parentNode;
+            const nextSibling = sidebar.nextSibling;
+            const header = document.querySelector('header');
+            const headerHeight = header ? header.offsetHeight : 70; // 默认值
+    //if (window.innerWidth < 768 && sidebar) {
+                //document.body.appendChild(sidebar);
+           // }
+    
+    
+    // 创建并添加侧边栏切换按钮（如果不存在）
+    if (!document.querySelector('.sidebar-toggle')) {
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'sidebar-toggle';
+        toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        document.body.appendChild(toggleBtn);
+        
+        // 添加点击事件
+        toggleBtn.addEventListener('click', function() {
+            if (sidebar) {
+                sidebar.classList.toggle('open');
+            }
+        });
+    }
+    
+    // 处理滚动事件
+    function updateSidebarPosition() {
+        if (!sidebar) return;
+        
+        // 计算顶部位置
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        
+        // 桌面端 - 确保sticky定位工作正常
+        if (window.innerWidth >= 768) {
+            sidebar.style.top = '50px'//`${headerHeight}px`;
+            sidebar.style.height ='90vh' //`calc(100vh - ${headerHeight}px)`;
+            origParent.insertBefore(sidebar, nextSibling);
+        } else {
+            // 移动端 - 固定位置
+            document.body.appendChild(sidebar);
+            sidebar.style.top = `${headerHeight}px`;
+            sidebar.style.height ='100vh' //`calc(100% - ${headerHeight}px)`;
+        }
+    }
+    
+    // 初始化位置
+    updateSidebarPosition();
+    
+    // 监听滚动事件
+    window.addEventListener('scroll', updateSidebarPosition);
+    
+    // 监听窗口大小变化
+    window.addEventListener('resize', function() {
+        updateSidebarPosition();
+        
+        // 处理移动端与桌面端切换
+        const toggleBtn = document.querySelector('.sidebar-toggle');
+        if (toggleBtn) {
+            toggleBtn.style.display = window.innerWidth < 768 ? 'flex' : 'none';
+        }
+        
+        // 在切换到桌面时关闭侧边栏
+        if (window.innerWidth >= 768 && sidebar) {
+            sidebar.classList.remove('open');
+        }
+    });
+    
+    // 处理文档内容区域点击关闭侧边栏（移动端）
+    const docsContent = document.querySelector('.docs-content');
+    if (docsContent) {
+        docsContent.addEventListener('click', function() {
+            if (window.innerWidth < 768 && sidebar && sidebar.classList.contains('open')) {
+                
+                sidebar.classList.remove('open');
+            }
+        });
+    }
+    
+    // 处理导航链接点击
+    const navLinks = document.querySelectorAll('.docs-nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // 更新活动状态
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 在移动端点击后关闭侧边栏
+            if (window.innerWidth < 768 && sidebar) {
+                sidebar.classList.remove('open');
+            }
+            
+            // 滚动到目标位置（带偏移量）
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId.startsWith('#')) {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    event.preventDefault();
+                    const yOffset = -headerHeight - 20; // 额外20px的间距
+                    const y = targetElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    
+                    window.scrollTo({
+                        top: y,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+    
+    // 监听窗口大小变化，处理响应式布局
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768) {
+            // 桌面视图，确保侧边栏可见
+            sidebar.classList.remove('open');
+            if (toggleBtn) {
+                toggleBtn.style.display = 'none';
+            }
+        } else {
+            // 移动视图，显示切换按钮
+            if (toggleBtn) {
+                toggleBtn.style.display = 'flex';
+            }
+        }
+    });
+    
+    // 初始检查视窗大小
+    if (window.innerWidth >= 768) {
+        if (toggleBtn) {
+            toggleBtn.style.display = 'none';
+        }
+    }
+            
+            // 深色模式切换
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            
+            darkModeToggle.addEventListener('change', function() {
+                document.body.classList.toggle('dark-mode', this.checked);
+                localStorage.setItem('darkMode', this.checked ? 'enabled' : 'disabled');
+            });
+            
+            // 检查用户之前的主题偏好
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                darkModeToggle.checked = true;
+                document.body.classList.add('dark-mode');
+            }
+            
+            // 初始化粒子效果
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particles-js', {
+                    "particles": {
+                        "number": {
+                            "value": 30,
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "#3498db"
+                        },
+                        "opacity": {
+                            "value": 0.3,
+                            "random": false
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#3498db",
+                            "opacity": 0.2,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 2,
+                            "direction": "none",
+                            "random": false,
+                            "straight": false,
+                            "out_mode": "out"
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "grab"
+                            },
+                            "onclick": {
+                                "enable": true,
+                                "mode": "push"
+                            },
+                            "resize": true
+                        }
+                    },
+                    "retina_detect": true
+                });
+            }
+        });
+    </script>
+</body>
+</html>
